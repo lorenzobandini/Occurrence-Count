@@ -20,9 +20,16 @@ public class CharacterCountTask implements Runnable{
         if(file.exists() && file.isFile()){
             try(BufferedReader reader = new BufferedReader(new FileReader(file))){
                 int c;
+                int spacecounter = 0;
+                int charactercounter = 0;
                 while((c = reader.read()) != -1){
+
                     char character = (char) c;
-                    
+                    charactercounter++;
+                    if(Character.isWhitespace(character)){
+                        spacecounter++;
+                        continue;
+                    }
                     if(!Character.toString(character).matches("[a-zA-Z]+")){
                         continue;
                     }
@@ -36,6 +43,12 @@ public class CharacterCountTask implements Runnable{
                     
                     int index = filePath.lastIndexOf(".");
                     FileWriter writer = new FileWriter(filePath.substring(0, index) + "_HashMap.txt");
+                    writer.write("Character count for " + file.getName() + "\n");
+                    writer.write("==========================================================================================\n");
+                    writer.write("Total Characters: " + charactercounter + "\n");
+                    writer.write("Total Spaces: " + spacecounter + "\n");
+                    writer.write("==========================================================================================\n");
+
                     for(Character character : charCountMap.keySet()){
                         writer.write(character + ": " + charCountMap.get(character) + "\n");
                     }

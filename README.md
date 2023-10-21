@@ -7,7 +7,7 @@ This is a simple program that counts the number of occurrences of a character in
 ## Implementation
 
 The program is implemented in Java.
-We use a BufferedReader to read, line by line, from a support file called 'filestoanalyze.txt,' the paths of the files to be analyzed.
+We use a BufferedReader to read, line by line, from a support file called 'filestoanalyze.txt', the paths of the files to be analyzed.
 The program employs a thread pool to concurrently perform the character occurrence count.
 For each program, we create a ConcurrentHashMap that uses characters as keys and the count as values.
 Each thread reads a file, and for each character, it increments the value associated with the corresponding key in the map.
